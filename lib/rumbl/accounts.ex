@@ -3,23 +3,42 @@ defmodule Rumbl.Accounts do
   The Accounts context.
   """
 
+  alias Rumbl.Repo
   alias Rumbl.Accounts.User
 
+  def change_user(%User{} = user) do
+    User.changeset(user, %{})
+  end
+
   def list_users do
-    [
-      %User{id: "1", name: "John", username: "john@gmail.com"},
-      %User{id: "2", name: "Jane", username: "jane@gmail.com"},
-      %User{id: "3", name: "John", username: "jane@gmail.com"}
-    ]
+    Repo.all(User)
   end
 
   def get_user(id) do
-    Enum.find(list_users(), fn map -> map.id == id end)
+    Repo.get(User, id)
+  end
+
+  def get_user!(id) do
+    Repo.get!(User, id)
   end
 
   def get_user_by(params) do
-    Enum.find(list_users(), fn map ->
-      Enum.all?(params, fn {key, val} -> Map.get(map, key) == val end)
-    end)
+    Repo.get_by(User, params)
+  end
+
+  def create_user(attrs \\ %{}) do
+    %User{}
+    |> User.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def change_registration(%User{} = user, params) do
+    User.registration_changeset(user, params)
+  end
+
+  def register_user(attrs \\ %{}) do
+    %User{}
+    |> User.registration_changeset(attrs)
+    |> Repo.insert()
   end
 end

@@ -1,0 +1,21 @@
+<.header>
+    New User
+    <:subtitle>Create a new user account.</:subtitle>
+  </.header>
+
+
+
+  <.simple_form :let={f} for={@changeset} action={~p"/users"}>
+    <%= if @changeset.action do %>
+    <.error>
+      Oops, something went wrong! Please check the errors below.
+    </.error>
+  <% end %>
+
+    <.input field={f[:name]} type="text" label="Name" />
+    <.input field={f[:username]} type="text" label="Username" />
+    <.input field={f[:password]} type="password" label="Password" />
+    <:actions>
+      <.button>Create User</.button>
+    </:actions>
+  </.simple_form>
