@@ -3,6 +3,8 @@ defmodule RumblWeb.UserController do
   alias Rumbl.Accounts
   alias Rumbl.Accounts.User
 
+  plug :authenticate_user when action in [:index, :show]
+
   def index(conn, _params) do
     users = Accounts.list_users()
     render(conn, :index, users: users)
@@ -17,6 +19,7 @@ defmodule RumblWeb.UserController do
     case Accounts.register_user(user_params) do
       {:ok, user} ->
         conn
+        |> RumblWeb.Auth.login(user)
         |> put_flash(:info, "#{user.name} created!")
         |> redirect(to: ~p"/users")
 

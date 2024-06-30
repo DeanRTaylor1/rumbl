@@ -1,0 +1,10 @@
+<h1>Login</h1>
+<.form :let={f} for={%{}} action={~p"/sessions"} as={:session}>
+  <div>
+    <.input field={f[:username]} type="text" placeholder="Username" />
+  </div>
+  <div>
+    <.input field={f[:password]} type="password" placeholder="Password" />
+  </div>
+  <.button>Log in</.button>
+</.form>
