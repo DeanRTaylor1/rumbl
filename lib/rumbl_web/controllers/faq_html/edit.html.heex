@@ -1,0 +1,8 @@
+<.header>
+  Edit Faq <%= @faq.id %>
+  <:subtitle>Use this form to manage faq records in your database.</:subtitle>
+</.header>
+
+<.faq_form changeset={@changeset} action={~p"/faqs/#{@faq}"} />
+
+<.back navigate={~p"/faqs"}>Back to faqs</.back>

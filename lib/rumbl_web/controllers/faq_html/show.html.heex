@@ -1,0 +1,16 @@
+<.header>
+  Faq <%= @faq.id %>
+  <:subtitle>This is a faq record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/faqs/#{@faq}/edit"}>
+      <.button>Edit faq</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Question"><%= @faq.question %></:item>
+  <:item title="Description"><%= @faq.description %></:item>
+</.list>
+
+<.back navigate={~p"/faqs"}>Back to faqs</.back>
